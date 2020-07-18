@@ -42,6 +42,11 @@ class BookController extends Controller
 		//dd($request->all());
 		Book::create($request->all());
 
+		if ($request->hasFile('image')) {
+			$path = $request->file('image')->store('storage/book/images');
+		}
+
+
 		return redirect()->route('book.index');
 	}
 
