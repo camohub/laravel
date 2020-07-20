@@ -18,14 +18,14 @@ class BooksTable extends Migration
 			$table->charset = 'utf8';
 			$table->collation = 'utf8_slovak_ci';
 			$table->bigIncrements('id');
-			$table->string('title')->index('books_title_idx');
-			$table->string('isbn')->index('books_isbn_idx');
-			$table->string('genre')->index('books_genre_idx');
-			$table->string('abstract');
+			$table->string('title', 255)->index('books_title_idx');
+			$table->string('isbn', 30)->index('books_isbn_idx');
+			$table->string('genre', 30)->index('books_genre_idx');
+			$table->string('abstract', 255);
 			$table->string('pages');
-			$table->string('author_name');
-			$table->string('email');
-			$table->string('img')->nullable(TRUE);
+			$table->string('author_name', 30);
+			$table->string('email', 30);
+			$table->string('img', 100)->nullable(TRUE);
 			$table->timestamps();
 		});
     }
