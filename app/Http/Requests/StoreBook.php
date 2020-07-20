@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class StoreBook extends FormRequest
 {
 	/**
@@ -23,7 +24,7 @@ class StoreBook extends FormRequest
 	 */
 	public function rules()
 	{
-		return [
+		$rules = [
 			'title' => 'required|max:255',
 			'isbn' => 'required|max:30',
 			'email' => 'required|email|max:30',
@@ -32,6 +33,13 @@ class StoreBook extends FormRequest
 			'genre' => 'required|max:30',
 			'pages' => 'required|integer|min:10',
 		];
+
+		if ( $this->hasFile('image') )
+		{
+			$rules['image'] = 'required|image';
+		}
+
+		return $rules;
 	}
 
 	/**
@@ -58,6 +66,7 @@ class StoreBook extends FormRequest
 			'pages.required' => 'Počet strán je povinné pole.',
 			'pages.integer' => 'Počet strán nieje číslo.',
 			'pages.min' => 'Počet strán nesmie byť menší ako 10. To nieje kniha ale leporelo.',
+			'image.image' => 'Vybraný súbor nieje obrázok',
 		];
 	}
 
@@ -68,16 +77,10 @@ class StoreBook extends FormRequest
 	{
 		$validator->after(function ($validator)
 		{
-			if (!$this->checkFile())
+			if ( $this->hasFile('image') && !$this->file('image')->isValid() )
 			{
-				$validator->errors()->add('field', 'Something is wrong with this field!');
+				$validator->errors()->add('image', 'Vložený súbor je nieje validný.');
 			}
 		});
-	}
-
-
-	protected function checkFile()
-	{
-		return TRUE;
 	}
 }

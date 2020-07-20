@@ -9,9 +9,18 @@
 // Bootstrap
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+h1 {
+  margin-bottom: 35px;
+}
+
+
 a {
-  color: #002a9f !important;
+  color: #002a9f;
   font-weight: bold;
+
+  &.btn {
+	color: #fff;
+  }
 }
 
 .content div {
@@ -22,4 +31,23 @@ a {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+.book-preview {
+  height: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  box-shadow: 3px 2px 5px 0 rgba(171,171,171,1);
+}
+
+.book-detail {
+  img {
+	display: block;
+	max-height: 200px;
+	margin-bottom: 15px;
+  }
+}
+
+.pagination {
+  margin-top: 25px;
 }

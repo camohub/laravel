@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBook;
 use App\Model\Book;
-use App\Model\BookService;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class BookController extends Controller
@@ -14,10 +13,8 @@ class BookController extends Controller
 
 	public function index()
 	{
-		//$books = DB::table('books')->orderBy('title', 'asc')->get();
 		return view('book.index', [
-			'title' => 'This is title',
-			'content' => 'This is content',
+			'title' => 'Zoznam kníh',
 			'books' => Book::orderBy('title', 'asc')->paginate(2),
 		]);
 	}
@@ -33,27 +30,53 @@ class BookController extends Controller
 	}
 
 
-	public function create(BookService $bookService)
+	public function create($id = NULL)
 	{
-		$bookService->test();
-		return view('book.create');
+		//$bookService->test();
+		$book = $id ? Book::where('id', $id)->first() : new Book();
+		return view('book.create', ['book' => $book, 'id' => $id]);
 	}
+
 
 	public function store(StoreBook $request)
 	{
-		//dd($request->all());
-		Book::create($request->all());
+		$values = $request->all();
 
-		if ($request->hasFile('image')) {
-			$path = $request->file('image')->store('storage/book/images');
+		if ($request->hasFile('image'))
+		{
+			$file = $request->file('image');
+			$fileName = $file->hashName();
+
+			$file->store(Book::IMAGE_PATH, 'public');
+			$values['img'] = $fileName;
 		}
 
+		$book = Book::create($values);
 
-		return redirect()->route('book.index');
+		return redirect()->route('book.detail', ['id' => $book->id]);
 	}
 
-	public function update(Request $request, $id)
+
+	public function update(StoreBook $request, $id)
 	{
-		dd($request->all());
+		$values = $request->all();
+		/** @var Book $book */
+		$book = Book::where('id', $id)->first();
+
+		if ($request->hasFile('image'))
+		{
+			$file = $request->file('image');
+			$fileName = $file->hashName();
+
+			$file->store(Book::IMAGE_PATH, 'public');
+			$values['img'] = $fileName;
+
+			// Delete prev. file
+			if( $book->img ) Storage::delete('public/' . Book::IMAGE_PATH . '/' . $book->img);
+		}
+
+		$book->update($values);
+
+		return redirect()->route('book.detail', ['id' => $book->id]);
 	}
 }
