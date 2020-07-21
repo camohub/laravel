@@ -11,11 +11,11 @@ class BookController extends Controller
 {
 
 
-	public function index()
+	public function index($search = NULL)
 	{
 		return view('book.index', [
 			'title' => 'Zoznam kníh',
-			'books' => Book::orderBy('title', 'asc')->paginate(2),
+			'books' => Book::orderBy('title', 'asc')->orderBy('created_at', 'desc')->paginate(2),
 		]);
 	}
 
