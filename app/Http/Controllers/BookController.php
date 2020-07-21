@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\Storage;
 class BookController extends Controller
 {
 
+	const SEARCH_SESSION = 'bookSearchForm';
+
 
 	public function index(Request $request)
 	{
-		$book = Book::orderBy('title', 'asc')->orderBy('title', 'asc')->orderBy('created_at', 'desc');
+		$book = Book::orderBy('title', 'asc')->orderBy('created_at', 'desc');
 
 		$this->setFilter($request, $book);
 
@@ -88,30 +90,49 @@ class BookController extends Controller
 
 	private function setFilter(Request $request, $book)
 	{
-		if( !$request->has('reset') )
+		$sess = $request->session();
+		$titleKey = self::SEARCH_SESSION . '.title';
+		$fromKey = self::SEARCH_SESSION . '.from';
+		$toKey = self::SEARCH_SESSION . '.to';
+
+		if( $request->has('reset') )
 		{
-			if( $request->title )
+			$this->resetSearchSession($request);
+		}
+		else
+		{
+			if( $request->title || $sess->get($titleKey) )
 			{
-				$book->where('title', 'like', '%' . $request->title . '%');
+				if( $request->title ) $request->session()->put($titleKey, $request->title);
+				$book->where('title', 'like', '%' . $sess->get($titleKey) . '%');
 			}
-			if( $request->from )  // Here should be some pattern validation
+			if( $request->from || $sess->get($fromKey) )  // Here should be some pattern validation
 			{
 				try
 				{
-					$from = \DateTime::createFromFormat('d.m.Y H:i', $request->from);
-					$book->where('created_at', '>=', $from);
+					if( $request->from ) $sess->put( $fromKey, \DateTime::createFromFormat('d.m.Y H:i', $request->from) );
+					$book->where('created_at', '>=', $sess->get($fromKey));
 				}
 				catch( \Exception $e ) {}
 			}
-			if( $request->to )  // Here should be some pattern validation
+			if( $request->to || $sess->get($toKey) )  // Here should be some pattern validation
 			{
 				try
 				{
-					$to = \DateTime::createFromFormat('d.m.Y H:i', $request->to);
-					$book->where('created_at', '<=', $to);
+					if( $request->to ) $sess->put( $fromKey, \DateTime::createFromFormat('d.m.Y H:i', $request->to) );
+					$book->where('created_at', '<=', $sess->get($fromKey));
 				}
 				catch( \Exception $e ) {}
 			}
 		}
+	}
+
+	private function resetSearchSession(Request $request)
+	{
+		$sessKey = self::SEARCH_SESSION . '.';
+		$sess = $request->session();
+		$sess->remove($sessKey.'title');
+		$sess->remove($sessKey.'from');
+		$sess->remove($sessKey.'to');
 	}
 }
