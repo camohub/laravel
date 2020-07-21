@@ -4,7 +4,7 @@
     {{--@include('validationErrors')--}}
 
     @csrf
-    {{ method_field('PUT') }}
+    @if( $id ){{ method_field('PUT') }}@endif
 
     <div class="form-group">
         <label for="title">Názov</label>

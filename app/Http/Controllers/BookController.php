@@ -6,7 +6,6 @@ use App\Http\Requests\StoreBook;
 use App\Model\Book;
 use App\Model\BookService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 
 class BookController extends Controller
@@ -45,45 +44,16 @@ class BookController extends Controller
 	}
 
 
-	public function store(StoreBook $request)
+	public function store(StoreBook $request, BookService $bookService)
 	{
-		$values = $request->all();
-
-		if ($request->hasFile('image'))
-		{
-			$file = $request->file('image');
-			$fileName = $file->hashName();
-
-			$file->store(Book::IMAGE_PATH, 'public');
-			$values['img'] = $fileName;
-		}
-
-		$book = Book::create($values);
-
+		$book = $bookService->storeBook();
 		return redirect()->route('book.detail', ['id' => $book->id]);
 	}
 
 
-	public function update(StoreBook $request, $id)
+	public function update(StoreBook $request, BookService $bookService, $id)
 	{
-		$values = $request->all();
-		/** @var Book $book */
-		$book = Book::where('id', $id)->first();
-
-		if ($request->hasFile('image'))
-		{
-			$file = $request->file('image');
-			$fileName = $file->hashName();
-
-			$file->store(Book::IMAGE_PATH, 'public');
-			$values['img'] = $fileName;
-
-			// Delete prev. file
-			if( $book->img ) Storage::delete('public/' . Book::IMAGE_PATH . '/' . $book->img);
-		}
-
-		$book->update($values);
-
+		$book = $bookService->updateBook($id);
 		return redirect()->route('book.detail', ['id' => $book->id]);
 	}
 
