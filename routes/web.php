@@ -11,7 +11,7 @@
 |
 */
 
-Route::match(['GET','POST'], '/{search?}', 'BookController@index')->name('book.index');
+Route::match(['GET','POST'], '/', 'BookController@index')->name('book.index');
 //Route::get('/{search?}', 'BookController@index')->name('book.index');
 Route::get('/{id}', 'BookController@detail')->name('book.detail')->where('id', '[0-9]+');
 Route::get('/book/create/{id?}', 'BookController@create')->name('book.create');

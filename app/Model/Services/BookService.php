@@ -5,19 +5,17 @@ namespace App\Model;
 
 class BookService
 {
-	/** @var  Book */
-	public $books;
 
 
-	public function construct(Book $books)
+	public function construct()
 	{
-		$this->books = $books;
+
 	}
 
 
 	public function test()
 	{
-		dd($this->books);
+		dd('BoooooooooooooooookService');
 	}
 
 }

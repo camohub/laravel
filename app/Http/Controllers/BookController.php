@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBook;
 use App\Model\Book;
+use App\Model\BookService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -39,7 +40,6 @@ class BookController extends Controller
 
 	public function create($id = NULL)
 	{
-		//$bookService->test();
 		$book = $id ? Book::where('id', $id)->first() : new Book();
 		return view('book.create', ['book' => $book, 'id' => $id]);
 	}
