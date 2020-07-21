@@ -5,6 +5,8 @@
         <div class="row justify-content-left">
             <h1 class="col-sm-12">{{$title}}</h1>
 
+            @include('book.searchForm')
+
             @foreach($books as $b)
                 <div class="col-sm-12 col-md-6">
                     <div class="book-preview">

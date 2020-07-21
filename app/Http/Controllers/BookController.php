@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBook;
 use App\Model\Book;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -11,11 +12,18 @@ class BookController extends Controller
 {
 
 
-	public function index($search = NULL)
+	public function index(Request $request)
 	{
+		$book = Book::orderBy('title', 'asc')->orderBy('title', 'asc')->orderBy('created_at', 'desc');
+
+		if( $request->has('title') )
+		{
+			$book->where('title', 'like', '%' . $request->get('title') . '%');
+		}
+
 		return view('book.index', [
 			'title' => 'Zoznam kníh',
-			'books' => Book::orderBy('title', 'asc')->orderBy('created_at', 'desc')->paginate(2),
+			'books' => $book->paginate(2),
 		]);
 	}
 
