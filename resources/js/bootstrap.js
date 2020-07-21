@@ -5,9 +5,11 @@
  */
 
 try {
-    window.$ = window.jQuery = require('jquery');
+	window.Popper = require('popper.js').default;
+	window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap');
+	require('bootstrap');
 
-    require('./main.js');
+	//require('./main.js');
+
 } catch (e) {}

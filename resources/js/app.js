@@ -5,3 +5,8 @@
  */
 
 require('./bootstrap');
+
+
+global.moment = require('moment');
+
+require('tempusdominus-bootstrap-4');

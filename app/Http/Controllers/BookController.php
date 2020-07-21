@@ -16,10 +16,7 @@ class BookController extends Controller
 	{
 		$book = Book::orderBy('title', 'asc')->orderBy('title', 'asc')->orderBy('created_at', 'desc');
 
-		if( $request->has('title') && !$request->has('reset') )
-		{
-			$book->where('title', 'like', '%' . $request->get('title') . '%');
-		}
+		$this->setFilter($request, $book);
 
 		return view('book.index', [
 			'title' => 'Zoznam kníh',
@@ -86,5 +83,35 @@ class BookController extends Controller
 		$book->update($values);
 
 		return redirect()->route('book.detail', ['id' => $book->id]);
+	}
+
+
+	private function setFilter(Request $request, $book)
+	{
+		if( !$request->has('reset') )
+		{
+			if( $request->title )
+			{
+				$book->where('title', 'like', '%' . $request->title . '%');
+			}
+			if( $request->from )  // Here should be some pattern validation
+			{
+				try
+				{
+					$from = \DateTime::createFromFormat('d.m.Y H:i', $request->from);
+					$book->where('created_at', '>=', $from);
+				}
+				catch( \Exception $e ) {}
+			}
+			if( $request->to )  // Here should be some pattern validation
+			{
+				try
+				{
+					$to = \DateTime::createFromFormat('d.m.Y H:i', $request->to);
+					$book->where('created_at', '<=', $to);
+				}
+				catch( \Exception $e ) {}
+			}
+		}
 	}
 }

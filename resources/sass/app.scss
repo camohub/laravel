@@ -5,14 +5,14 @@
 @import 'variables';
 
 // Bootstrap
-//@import '~bootstrap/scss/bootstrap';
-// Bootstrap
 @import '~bootstrap/dist/css/bootstrap.min.css';
+
+// Tempus Dominus
+@import '~tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css';
 
 h1 {
   margin-bottom: 35px;
 }
-
 
 a {
   color: #002a9f;
