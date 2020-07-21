@@ -7,8 +7,9 @@
         <div class="form-group col-sm-6">
             <input type="text" name="title" value="{{old('title')}}" class="form-control" placeholder="Vyhľadať názov">
         </div>
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-6">
             <input type="submit" class="btn btn-info" value="Hľadať">
+            <input type="submit" name="reset" class="btn btn-danger" value="Reset">
         </div>
     </div>
 </form>

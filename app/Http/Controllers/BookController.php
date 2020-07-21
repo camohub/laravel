@@ -16,7 +16,7 @@ class BookController extends Controller
 	{
 		$book = Book::orderBy('title', 'asc')->orderBy('title', 'asc')->orderBy('created_at', 'desc');
 
-		if( $request->has('title') )
+		if( $request->has('title') && !$request->has('reset') )
 		{
 			$book->where('title', 'like', '%' . $request->get('title') . '%');
 		}
