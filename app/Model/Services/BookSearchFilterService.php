@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\Services;
 
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 
 class BookSearchFilterService
 {
+
+	const SEARCH_SESSION = 'bookSearchForm';
 
 	/** @var  Request */
 	public $request;

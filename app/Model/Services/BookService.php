@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\Services;
 
 
+use App\Model\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 

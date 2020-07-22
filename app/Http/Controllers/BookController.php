@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBook;
+
 use App\Model\Book;
-use App\Model\BookSearchFilterService;
-use App\Model\BookService;
-use Illuminate\Http\Request;
+use App\Model\Services\BookService;
+use App\Model\Services\BookSearchFilterService;
 
 
 class BookController extends Controller
 {
 
-	const SEARCH_SESSION = 'bookSearchForm';
-
-
-	public function index(Request $request, BookSearchFilterService $searchFilterService)
+	public function index( BookSearchFilterService $searchFilterService)
 	{
 		$book = Book::orderBy('title', 'asc')->orderBy('created_at', 'desc');
 
