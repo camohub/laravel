@@ -13,6 +13,8 @@ class BookController extends Controller
 
 	public function index( BookSearchFilterService $searchFilterService)
 	{
+		$this->authorize('viewAny', Book::class);
+
 		$book = Book::orderBy('title', 'asc')->orderBy('created_at', 'desc');
 
 		$searchFilterService->setFilter($book);

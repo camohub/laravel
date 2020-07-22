@@ -18,19 +18,19 @@ class BookPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can view the book.
      *
      * @param  \App\User  $user
-     * @param  \App\Book  $book
+     * @param  \App\Model\Book  $book
      * @return mixed
      */
     public function view(User $user, Book $book)
     {
-        //
+        return true;
     }
 
     /**
