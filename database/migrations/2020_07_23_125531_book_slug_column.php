@@ -25,8 +25,8 @@ class BookSlugColumn extends Migration
      */
     public function down()
     {
-		Schema::table('books', function (Blueprint $table) {
+		/*Schema::table('books', function (Blueprint $table) {
 			$table->dropColumn('slug');
-		});
+		});*/
     }
 }

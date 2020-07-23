@@ -10,6 +10,9 @@
 // Tempus Dominus
 @import '~tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css';
 
+// VUE
+@import 'vue-flash-component';
+
 h1 {
   margin-bottom: 35px;
 }
@@ -73,3 +76,5 @@ a {
 .alert-info .close {
   color: $blue;
 }
+
+

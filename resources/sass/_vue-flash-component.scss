@@ -1,0 +1,37 @@
+#vueFlashWrapper {
+  position: fixed;
+  bottom: 0px;
+  right: 15px;
+  max-width: 350px;
+  z-index: 1000;
+}
+
+#flash-component {
+  background-color: $green;
+  padding: 15px 35px 15px 25px;
+  margin-bottom: 15px;
+  right: 15px;
+  color: $white;
+  border-radius: 3px;
+}
+
+.hide {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 10px;
+  float: right;
+  padding: 0 5px 5px 5px;
+  margin: 0px -25px 5px 5px;
+  color: $white;
+  text-align: center;
+	background-color: $dark-green;
+  border-radius: 10px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .35s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}

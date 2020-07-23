@@ -40,7 +40,7 @@ class BookController extends Controller
 		if( !Auth::user() || ($id && !Auth::user()->can('update', $book)) )
 		{
 			flash('Access denied! You don\'t have a permission for this action.')->important()->error();
-			return redirect()->back()->with('alertDanger', 'Access denied!');
+			return redirect()->back();
 		}
 		return view('book.create', ['book' => $book, 'id' => $id]);
 	}

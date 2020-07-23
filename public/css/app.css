@@ -209,6 +209,47 @@
 
 .input-group [data-toggle="datetimepicker"] {
   cursor: pointer; }
+#vueFlashWrapper {
+  position: fixed;
+  bottom: 0px;
+  right: 15px;
+  max-width: 350px;
+  z-index: 1000;
+}
+
+#flash-component {
+  background-color: #38c172;
+  padding: 15px 35px 15px 25px;
+  margin-bottom: 15px;
+  right: 15px;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.hide {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 10px;
+  float: right;
+  padding: 0 5px 5px 5px;
+  margin: 0px -25px 5px 5px;
+  color: #fff;
+  text-align: center;
+  background-color: #236d3c;
+  border-radius: 10px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.35s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
 h1 {
   margin-bottom: 35px;
 }

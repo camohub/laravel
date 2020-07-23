@@ -34,6 +34,10 @@ class StoreBook extends FormRequest
 			'pages' => 'required|integer|min:10',
 		];
 
+		if( $this->getMethod() == 'PUT' )
+		{
+			$rules['title'] = 'required|max:255';
+		}
 		if ( $this->hasFile('image') )
 		{
 			$rules['image'] = 'required|image';
