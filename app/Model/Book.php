@@ -14,8 +14,17 @@ class Book extends Model
 
 
 	protected $fillable = [
-		'user_id', 'title', 'genre', 'isbn', 'author_name', 'email', 'abstract', 'pages', 'img'
+		'user_id', 'title', 'slug', 'genre', 'isbn', 'author_name', 'email', 'abstract', 'pages', 'img'
 	];
+
+	/**
+	 * This injects model to controller methods via slug
+	 * @return string
+	 */
+	/*public function getRouteKeyName()
+	{
+		return 'slug';
+	}*/
 
 
 	public function user()

@@ -6,15 +6,13 @@ namespace App\Http\Controllers;
 use App\Model\Book;
 use App\Model\Services\BookService;
 use App\Model\Services\BookSearchFilterService;
-use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 
 class BookController extends Controller
 {
 
-	public function index( BookSearchFilterService $searchFilterService)
+	public function index(BookSearchFilterService $searchFilterService)
 	{
 		$book = Book::orderBy('title', 'asc')->orderBy('created_at', 'desc');
 
@@ -27,12 +25,10 @@ class BookController extends Controller
 	}
 
 
-	public function detail($id)
+	public function detail($slug)
 	{
-		$book = Book::where('id', (int)$id)->first();
-
 		return view('book.detail', [
-			'book' => $book,
+			'book' => Book::where('slug', $slug)->first(),
 		]);
 	}
 
@@ -54,7 +50,7 @@ class BookController extends Controller
 	{
 		$book = $bookService->storeBook();
 		flash('New book was successfully created.')->important();
-		return redirect()->route('book.detail', ['id' => $book->id]);
+		return redirect()->route('book.detail', ['slug' => $book->slug]);
 	}
 
 
@@ -62,7 +58,7 @@ class BookController extends Controller
 	{
 		$book = $bookService->updateBook($id);
 		flash('The book was successfully updated.')->important();
-		return redirect()->route('book.detail', ['id' => $book->id]);
+		return redirect()->route('book.detail', ['slug' => $book->slug]);
 	}
 
 }

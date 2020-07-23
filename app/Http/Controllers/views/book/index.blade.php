@@ -11,7 +11,7 @@
                 <div class="col-sm-12 col-md-6">
                     <div class="book-preview">
                         <h2>
-                            <a href="{{ route('book.detail', ['id' => $b->id]) }}">{{$b->title}}</a>
+                            <a href="{{ route('book.detail', ['slug' => $b->slug]) }}">{{$b->title}}</a>
                         </h2>
                         <div>{{$b->abstract}}</div>
 

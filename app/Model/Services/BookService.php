@@ -5,7 +5,9 @@ namespace App\Model\Services;
 
 use App\Model\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 class BookService
@@ -24,6 +26,8 @@ class BookService
 	public function storeBook()
 	{
 		$values = $this->request->all();
+		$values['slug'] = Str::slug($values['title']);
+		$values['user_id'] = Auth::user()->id;
 
 		$fileName = $this->storeImage();
 		if( $fileName ) $values['img'] = $fileName;
@@ -37,6 +41,9 @@ class BookService
 	public function updateBook($id)
 	{
 		$values = $this->request->all();
+		$values['slug'] = Str::slug($values['title']);
+		$values['user_id'] = Auth::user()->id;
+
 		/** @var Book $book */
 		$book = Book::where('id', $id)->first();
 
