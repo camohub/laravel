@@ -3,6 +3,7 @@
 namespace App\Model\Services;
 
 
+use App\Http\Requests\StoreBook;
 use App\Model\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class BookService
 	public $request;
 
 
-	public function __construct(Request $r)
+	public function __construct(StoreBook $r)
 	{
 		$this->request = $r;
 	}

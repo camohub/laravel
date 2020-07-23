@@ -25,7 +25,7 @@ class StoreBook extends FormRequest
 	public function rules()
 	{
 		$rules = [
-			'title' => 'required|max:255',
+			'title' => 'required|max:255|unique:books',
 			'isbn' => 'required|max:30',
 			'email' => 'required|email|max:30',
 			'author_name' => 'required|max:30',
@@ -52,6 +52,7 @@ class StoreBook extends FormRequest
 		return [
 			'title.required' => 'Názov je povinné pole.',
 			'title.max' => 'Názov môže mať max 255 znakov.',
+			'title.unique' => 'Kniha s rovnakým názvom už existuje.',
 			'isbn.required' => 'ISBN je povinné pole.',
 			'isbn.max' => 'ISBN môže mať max 30 znakov.',
 			'email.required' => 'Email je povinné pole.',
