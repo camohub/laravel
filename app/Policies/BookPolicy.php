@@ -39,10 +39,10 @@ class BookPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    /*public function create(User $user)
     {
         return TRUE;
-    }
+    }*/
 
     /**
      * Determine whether the user can update the book.
@@ -53,7 +53,7 @@ class BookPolicy
      */
     public function update(User $user, Book $book)
     {
-        return TRUE;
+        return $user->id === $book->user->id;
     }
 
     /**

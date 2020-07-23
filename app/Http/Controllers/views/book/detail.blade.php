@@ -20,9 +20,16 @@
                         <small>{{$book->created_at->format('d.m.Y H:i:s')}}</small>
                     @endif
                 </div>
+
                 <div>
-                    <a href="{{ route('book.create', ['id' => $book->id]) }}" class="btn btn-info">Editovať</a>
+                    <small>{{$book->user->name}}</small>
                 </div>
+
+                @can('update', $book)
+                    <div>
+                        <a href="{{ route('book.create', ['id' => $book->id]) }}" class="btn btn-info">Editovať</a>
+                    </div>
+                @endcan
                 {{--<div>
                     <a href="{{ route('book.delete', ['id' => $book->id]) }}" class="btn btn-danger">Vymazať</a>
                 </div>--}}

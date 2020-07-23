@@ -14,11 +14,16 @@
                             <a href="{{ route('book.detail', ['id' => $b->id]) }}">{{$b->title}}</a>
                         </h2>
                         <div>{{$b->abstract}}</div>
-                        <div>{{$b->author_name}}</div>
+
+                        <div>Autor: {{$b->author_name}}</div>
+
                         <div>ISBN: {{$b->isbn}}</div>
+
                         @if($b->created_at)
-                            <div><small>{{$b->created_at->format('d.m.Y H:i:s')}}</small></div>
+                            <div><small>Created: {{$b->created_at->format('d.m.Y H:i:s')}}</small></div>
                         @endif
+
+                        <div><small>User: {{$b->user->name}}</small></div>
                     </div>
                 </div>
             @endforeach

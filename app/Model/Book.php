@@ -3,6 +3,7 @@
 namespace App\Model;
 
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -13,8 +14,14 @@ class Book extends Model
 
 
 	protected $fillable = [
-		'title', 'genre', 'isbn', 'author_name', 'email', 'abstract', 'pages', 'img'
+		'user_id', 'title', 'genre', 'isbn', 'author_name', 'email', 'abstract', 'pages', 'img'
 	];
+
+
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 
 
 }

@@ -249,3 +249,24 @@ a.btn {
   margin-top: 25px;
 }
 
+.close {
+  float: right;
+  height: 1.5rem;
+  margin-top: -0.2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+
+.alert-danger .close {
+  color: #e3342f;
+}
+
+.alert-success .close {
+  color: #38c172;
+}
+
+.alert-info .close {
+  color: #3490dc;
+}
+
