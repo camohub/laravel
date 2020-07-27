@@ -21,10 +21,10 @@ class Book extends Model
 	 * This injects model to controller methods via slug
 	 * @return string
 	 */
-	/*public function getRouteKeyName()
+	public function getRouteKeyName()
 	{
 		return 'slug';
-	}*/
+	}
 
 
 	public function user()

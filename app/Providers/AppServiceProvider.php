@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
 			$this->app->register(TelescopeServiceProvider::class);
 			//$this->app->register(BookSearchFilterService::class);
 		}
+		if ($this->app->environment() !== 'production') {
+			$this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+		}
 	}
 
 	/**

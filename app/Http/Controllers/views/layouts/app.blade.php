@@ -39,7 +39,7 @@
 					<!-- Right Side Of Navbar -->
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
-							<a class="nav-link" href="{{ route('book.index') }}">Knihy</a>
+							<a class="nav-link" href="{{ route('book.index', ['bbb' => 'ccccccc']) }}">Knihy</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('book.create') }}">Vložiť knihu</a>
@@ -106,6 +106,8 @@
 			@foreach (session('flash_notification', collect())->toArray() as $message)
 				vueApp.vueFlashes.push( {!! json_encode($message) !!} );
 			@endforeach
+
+            console.log(vueApp.vueFlashes);
 		});
 	</script>
 

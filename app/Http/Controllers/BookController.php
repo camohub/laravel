@@ -14,21 +14,23 @@ class BookController extends Controller
 
 	public function index(BookSearchFilterService $searchFilterService)
 	{
+		flash('Hello I am an flash message for detail.')->important();
 		$book = Book::orderBy('title', 'asc')->orderBy('created_at', 'desc');
 
 		$searchFilterService->setFilter($book);
 
 		return view('book.index', [
 			'title' => 'Zoznam kníh',
-			'books' => $book->with('user')->paginate(6),
+			'books' => $book->with('user')->paginate(6)->appends(request()->query()),  // query() prida do paginatora get parametre
 		]);
 	}
 
 
-	public function detail($slug)
+	public function detail(Book $book/*$slug*/)  // Look at the Book getRouteKey()
 	{
 		return view('book.detail', [
-			'book' => Book::where('slug', $slug)->first(),
+			'book' => $book,
+			//'book' => Book::where('slug', $slug)->first(),
 		]);
 	}
 
