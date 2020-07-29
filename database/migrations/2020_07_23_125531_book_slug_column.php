@@ -14,7 +14,9 @@ class BookSlugColumn extends Migration
     public function up()
     {
 		Schema::table('books', function (Blueprint $table) {
-			$table->string('slug', 250)->after('title')->unique();
+			if (!Schema::hasColumn('books', 'slug')) {
+				$table->string('slug', 250)->after('title')->unique();
+			}
 		});
     }
 

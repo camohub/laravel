@@ -6,27 +6,29 @@ namespace App\Http\Controllers;
 use App\Model\Book;
 use App\Model\Services\BookService;
 use App\Model\Services\BookSearchFilterService;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Cache\Events\CacheHit;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 
 
 class BookController extends Controller
 {
 
+
 	public function index(BookSearchFilterService $searchFilterService)
 	{
-		flash('Hello I am an flash message for detail.')->important();
-		$book = Book::orderBy('title', 'asc')->orderBy('created_at', 'desc');
+		$books = Book::orderBy('title', 'asc')->orderBy('created_at', 'desc');
 
-		$searchFilterService->setFilter($book);
+		$searchFilterService->setFilter($books);
 
 		return view('book.index', [
 			'title' => 'Zoznam kníh',
-			'books' => $book->with('user')->paginate(6)->appends(request()->query()),  // query() prida do paginatora get parametre
+			'books' => $books->with('user')->paginate(6)->appends(request()->query()),  // query() prida do paginatora get parametre
 		]);
 	}
 
 
-	public function detail(Book $book/*$slug*/)  // Look at the Book getRouteKey()
+	public function detail(Book $book)  // Look at the Book getRouteKey()
 	{
 		return view('book.detail', [
 			'book' => $book,
@@ -39,7 +41,7 @@ class BookController extends Controller
 	{
 		$book = $id ? Book::where('id', $id)->first() : new Book();
 
-		if( !Auth::user() || ($id && !Auth::user()->can('update', $book)) )
+		if( !aUser() || ($id && aUser()->cannot('update', $book)) )
 		{
 			flash('Access denied! You don\'t have a permission for this action.')->important()->error();
 			return redirect()->back();
@@ -52,7 +54,7 @@ class BookController extends Controller
 	{
 		$book = $bookService->storeBook();
 		flash('New book was successfully created.')->important();
-		return redirect()->route('book.detail', ['slug' => $book->slug]);
+		return __redirectRoute('book.detail', ['slug' => $book->slug]);
 	}
 
 
@@ -60,7 +62,7 @@ class BookController extends Controller
 	{
 		$book = $bookService->updateBook($id);
 		flash('The book was successfully updated.')->important();
-		return redirect()->route('book.detail', ['slug' => $book->slug]);
+		return __redirectRoute('book.detail', ['slug' => $book->slug]);
 	}
 
 }

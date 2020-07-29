@@ -54,24 +54,24 @@ class StoreBook extends FormRequest
 	public function messages()
 	{
 		return [
-			'title.required' => 'Názov je povinné pole.',
-			'title.max' => 'Názov môže mať max 255 znakov.',
-			'title.unique' => 'Kniha s rovnakým názvom už existuje.',
-			'isbn.required' => 'ISBN je povinné pole.',
-			'isbn.max' => 'ISBN môže mať max 30 znakov.',
-			'email.required' => 'Email je povinné pole.',
-			'email.email' => 'Zadaný email nieje validná emailová adresa.',
-			'email.max' => 'Email môže mať max 30 znakov.',
-			'author_name.required' => 'Meno autora je povinné pole.',
-			'author_name.max' => 'Meno autora môže mať max 30 znakov.',
-			'abstract.required' => 'Abstrakt je povinné pole.',
-			'abstract.max' => 'Abstrakt môže mať max 255 znakov.',
-			'genre.required' => 'Žáner je povinné pole.',
-			'genre.max' => 'Žáner môže mať max 30 znakov.',
-			'pages.required' => 'Počet strán je povinné pole.',
-			'pages.integer' => 'Počet strán nieje číslo.',
-			'pages.min' => 'Počet strán nesmie byť menší ako 10. To nieje kniha ale leporelo.',
-			'image.image' => 'Vybraný súbor nieje obrázok',
+			'title.required' => 'forms.createBook.title_required',
+			'title.max' => 'forms.createBook.title_max',
+			'title.unique' => 'forms.createBook.title_unique',
+			'isbn.required' => 'forms.createBook.isbn_required',
+			'isbn.max' => 'forms.createBook.isbn_max',
+			'email.required' => 'forms.createBook.email_required',
+			'email.email' => 'forms.createBook.email_email',
+			'email.max' => 'forms.createBook.email_max',
+			'author_name.required' => 'forms.createBook.author_name_required',
+			'author_name.max' => 'forms.createBook.author_name_max',
+			'abstract.required' => 'forms.createBook.abstract_required',
+			'abstract.max' => 'forms.createBook.abstract_max',
+			'genre.required' => 'forms.createBook.genre_required',
+			'genre.max' => 'forms.createBook.genre_max',
+			'pages.required' => 'forms.createBook.pages_required',
+			'pages.integer' => 'forms.createBook.pages_integer',
+			'pages.min' => 'forms.createBook.pages_min',
+			'image.image' => 'forms.createBook.image_required',
 		];
 	}
 
@@ -84,7 +84,7 @@ class StoreBook extends FormRequest
 		{
 			if ( $this->hasFile('image') && !$this->file('image')->isValid() )
 			{
-				$validator->errors()->add('image', 'Vložený súbor je nieje validný.');
+				$validator->errors()->add('image', 'forms.createBook.image_valid');
 			}
 		});
 	}

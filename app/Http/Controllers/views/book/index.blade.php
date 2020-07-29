@@ -3,7 +3,10 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-left">
-            <h1 class="col-sm-12">{{$title}}</h1>
+            <h1 class="col-sm-12">{{ __('book.index.title') }}</h1>
+
+            {{--<a href="{{__route('book.index')}}">index locale</a>&nbsp;
+            <a href="{{__route('book.index', ['locale' => 'en'])}}">index locale</a>--}}
 
             @include('book.searchForm')
 
@@ -11,7 +14,7 @@
                 <div class="col-sm-12 col-md-6">
                     <div class="book-preview">
                         <h2>
-                            <a href="{{ route('book.detail', ['slug' => $b->slug]) }}">{{$b->title}}</a>
+                            <a href="{{ __route('book.detail', ['slug' => $b->slug]) }}">{{$b->title}}</a>
                         </h2>
                         <div>{{$b->abstract}}</div>
 
