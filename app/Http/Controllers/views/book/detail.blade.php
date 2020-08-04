@@ -4,9 +4,11 @@
     <div class="container">
         <div class="row justify-content-left">
             <div class="col-sm-12 col-md-6 book-detail">
-                @if( $book->img )
-                    <img src="{{ asset('storage/book/images/' . $book->img) }}" alt="">
-                @endif
+                <div>
+                    @foreach( $book->images as $img )
+                            <img src="{{ asset('storage/book/images/' . $img->file) }}" alt="">
+                    @endforeach
+                </div>
 
                 <h2>{{$book->title}}</h2>
 

@@ -9,6 +9,8 @@ use App\Model\Services\BookSearchFilterService;
 use Illuminate\Cache\Events\CacheHit;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 
 class BookController extends Controller
@@ -30,6 +32,17 @@ class BookController extends Controller
 
 	public function detail(Book $book)  // Look at the Book getRouteKey()
 	{
+		//dd(storage_path('test1.txt'));
+		try
+		{
+			throw new \Exception('exceeeeeeeeeeeeeeption');
+		}
+		catch( \Exception $e )
+		{
+			Log::debug($e);
+		}
+
+
 		return view('book.detail', [
 			'book' => $book,
 			//'book' => Book::where('slug', $slug)->first(),

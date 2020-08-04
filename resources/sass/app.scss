@@ -45,7 +45,7 @@ a {
 
 .book-detail {
   img {
-	display: block;
+	display: inline-block;
 	max-height: 200px;
 	margin-bottom: 15px;
   }
@@ -75,4 +75,9 @@ a {
 
 .alert-info .close {
   color: $blue;
+}
+
+input[type="file"] {
+  height: auto;
+  background-color: #d7f0ff;
 }

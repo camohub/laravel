@@ -20,7 +20,7 @@ return [
 		'pages_required' => 'Počet strán je povinné pole.',
 		'pages_integer' => 'Počet strán nieje číslo.',
 		'pages_min' => 'Počet strán nesmie byť menší ako 10. To nieje kniha ale leporelo.',
-		'image_image' => 'Vybraný súbor nieje obrázok',
-		'image_valid' => 'Vložený súbor je nieje validný.',
+		'image_image' => 'Vybrané súbory musia byť obrázky.',
+		'image_valid' => 'Vložené súbory nie sú validné.',
 	]
 ];

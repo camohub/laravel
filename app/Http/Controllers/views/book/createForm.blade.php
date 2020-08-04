@@ -4,7 +4,7 @@
     {{--@include('validationErrors')--}}
 
     @csrf
-    @if( $id ){{ method_field('PUT') }}@endif
+    @if( $id ){!! method_field('PUT') !!}@endif
 
     <div class="form-group">
         <label for="title">Názov</label>
@@ -50,8 +50,16 @@
 
     <div class="form-group">
         <label for="abstract">Titulný obrázok</label>
-        <input type="file" name="image" class="form-control">
-        @error('image')<div class="text-danger">@lang($message)</div>@enderror
+        <input multiple type="file" name="images[]" class="form-control">
+        {{-- The problem with next is that Laravel creates keys like images.0 and images.1 ... --}}
+        {{--@error('images')<div class="text-danger one">@lang($message)</div>@enderror--}}
+        @if( $errors->all() )
+            <?php $imgsErrors = [] ?>
+                @foreach( $errors->all() as $e )
+                    @if( strpos( $e, 'image' ) !== FALSE )<?php $imgsErrors[$e] = __($e); ?>@endif
+                @endforeach
+            <div class="text-danger">{!! join('<br>', $imgsErrors) !!}</div>
+        @endIf
     </div>
 
     <div class="form-group">

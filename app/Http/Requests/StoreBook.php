@@ -38,9 +38,9 @@ class StoreBook extends FormRequest
 		{
 			$rules['title'] = 'required|max:255';
 		}
-		if ( $this->hasFile('image') )
+		if ( $this->hasFile('images') )
 		{
-			$rules['image'] = 'required|image';
+			$rules['images.*'] = 'required|image';
 		}
 
 		return $rules;
@@ -71,7 +71,7 @@ class StoreBook extends FormRequest
 			'pages.required' => 'forms.createBook.pages_required',
 			'pages.integer' => 'forms.createBook.pages_integer',
 			'pages.min' => 'forms.createBook.pages_min',
-			'image.image' => 'forms.createBook.image_required',
+			'images.*.image' => 'forms.createBook.image_image',
 		];
 	}
 
@@ -82,9 +82,12 @@ class StoreBook extends FormRequest
 	{
 		$validator->after(function ($validator)
 		{
-			if ( $this->hasFile('image') && !$this->file('image')->isValid() )
+			if ( $this->hasFile('images') )
 			{
-				$validator->errors()->add('image', 'forms.createBook.image_valid');
+				foreach ( $this->file('images') as $image )
+				{
+					if( ! $image->isValid() ) $validator->errors()->add('images', 'forms.createBook.image_valid');
+				}
 			}
 		});
 	}
