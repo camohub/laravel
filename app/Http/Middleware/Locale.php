@@ -26,7 +26,7 @@ class Locale
 		{
 			Session::forget(LangController::SESSION_KEY);
 			$route = $request->route();
-			$params = $route->parameters();
+			$params = array_merge($request->query(), $route->parameters());
 			$params['locale'] = $sessLocale;
 			return __redirectRoute($route->getName(), $params);
 		}
