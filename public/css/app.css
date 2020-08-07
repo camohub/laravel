@@ -281,7 +281,7 @@ a.btn {
 }
 
 .book-detail img {
-  display: block;
+  display: inline-block;
   max-height: 200px;
   margin-bottom: 15px;
 }
@@ -309,5 +309,10 @@ a.btn {
 
 .alert-info .close {
   color: #3490dc;
+}
+
+input[type=file] {
+  height: auto;
+  background-color: #d7f0ff;
 }
 
