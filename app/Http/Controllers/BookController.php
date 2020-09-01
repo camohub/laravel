@@ -25,6 +25,7 @@ class BookController extends Controller
 
 		return view('book.index', [
 			'title' => 'Zoznam kníh',
+			// with + look at Lazy eager loading https://laravel.com/docs/7.x/eloquent-relationships#lazy-eager-loading
 			'books' => $books->with('user')->paginate(6)->appends(request()->query()),  // query() prida do paginatora get parametre
 		]);
 	}
